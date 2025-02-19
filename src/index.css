@@ -1,13 +1,243 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+    /* .nav-title {
+        @apply
+    } */
+@layer components {
+  .nav-com {
+    @apply flex lg:flex-row  flex-col lg:gap-[20px] gap-[10px] items-center text-[16px] text-gray-600 ;
+  }
+  .profile-container {
+    @apply w-[90%] xs:w-[60%] md:w-[50%] fixed lg:-right-[10%] max-lg:top-0 transition-all duration-700 ease-in-out max-lg:left-[20px] bg-gray-800 text-snow p-[20px] z-10 
+  }
+  .cancel-profile {
+    @apply absolute right-[5px] top-[5px] bg-snow cursor-pointer
+  }
+  .profile-title {
+    @apply w-full mb-[20px]
+  }
+  .profile-title h2 {
+    @apply ml-[20px] font-semibold text-[20px] mb-[10px]
+  }
+  .divider{
+    @apply w-full h-[1px]  border-none bg-gray-400
+  }
+  .profile-cards {
+    @apply w-full lg:pl-[20px] mb-[20%]
+  }
+  .profile-img {
+    @apply w-[100%] flex flex-col items-center lg:justify-center gap-y-[10px] mb-[20px]
+  }
+  .profile-img img {
+    @apply w-full md:w-[80%] lg:w-[20%] lg:rounded-full
+  }
+  .edit label{
+    @apply text-gray-200 cursor-pointer transition-all hover:text-teal-400 duration-300
+  }
+  .profile-card {
+    @apply w-[100%] flex flex-wrap items-center font-normal max-md:text-base text-[18px]
+  }
+  .profile-card h3 {
+    @apply w-[30%] 
+  }
+  
+  .logout {
+    @apply w-full pl-[20px] flex items-center justify-between
+  }
+  .logout button:first-child {
+    @apply w-[30%] bg-red-600 py-[8px] rounded font-medium text-[16px] transition-all duration-300 hover:bg-red-800
+  }
+  .logout button:last-child {
+    @apply w-[30%] bg-teal-600 py-[8px] rounded font-medium text-[16px] transition-all duration-300 hover:bg-teal-800
+  }
+  .nav-profile {
+    @apply flex max-lg:flex-col max-lg:mt-[20px] gap-[5px] items-center cursor-pointer max-lg:justify-center
+  }
+  .nav-link {
+    @apply hover:bg-nav-hover hover:text-white transition-all duration-300 ease-linear rounded-[5px] py-[2px] px-[8px];
+  }
+  .content-title {
+    @apply text-gray-600 font-monostrat font-medium text-[16px];
+  }
+  .search {
+    @apply w-[25px] absolute left-[20px] inset-y-0 translate-y-[80%] hover:cursor-text text-gray-200;
+  }
+  .input-query {
+    @apply w-[100%] pl-[4em] py-[8px] rounded-full font-normal bg-gray-800 text-gray-200 outline-none placeholder:text-gray-200 border-2 border-transparent focus:ring-2 focus:ring-gray-400 border-gray-700 transition-all duration-300 text-base focus:border-2;
+  }
+  .generate {
+    @apply bg-gradient-to-r from-blue-500 to-purple-600 shadow outline-none text-white text-base py-[10px] w-full lg:w-[20%] transition-all duration-300 ease-linear hover:opacity-70 rounded-full;
+  }
+  .loader {
+    @apply bg-green-600 h-full transition-all duration-500 rounded-full
+  }
+  .body {
+    @apply group-hover:shadow-inner group-hover:shadow-black drop-shadow-2xl w-[100%] h-[100%] group-hover:scale-x-105 object-cover transition-all transform hover:cursor-pointer  lg:hover:-translate-y-[2em];
+  }
+  .title {
+    @apply text-center text-gray-100 font-medium text-[22px] mb-[1em];
+  }
+  .pattern {
+    @apply bg-blue-600 rounded py-[4px] px-[1em] hover:bg-blue-700 transition-all duration-300 font-roboto text-[16px] font-semibold;
+  }
+  .cancel {
+    @apply bg-gray-500 rounded py-[4px] px-[1em]  hover:bg-gray-600 transition-all duration-300 font-roboto text-[16px] font-semibold;
+  }
+  .texture-title {
+    @apply text-gray-100 font-medium text-2xl mb-[2%] text-center capitalize;
+  }
+  .texture-hero {
+    @apply w-full mb-[2em] flex max-lg:flex-col justify-around items-center text-white ;
+  }
+  .card {
+    @apply  rounded w-[90%] xs:w-full lg:w-[15%] text-center max-lg:my-[2em]
+  }
+  .group {
+    @apply bg-gray-800 w-full lg:w-[70%] xl:w-[60%] text-slate-200 mx-auto rounded-md hover:cursor-pointer hover:bg-slate-950 transition-all duration-300 py-[10px];
+  }
+  .h {
+    @apply my-[20px] w-[80%] mx-auto opacity-[0.5] max-lg:hidden
+  }
+  .file-title {
+    @apply font-medium text-gray-100 text-[18px]
+  }
+  .upload-file {
+    @apply text-gray-200 cursor-pointer bg-gray-800 rounded-lg w-full md:w-[60%] text-center py-[5px] transition-all duration-300 hover:bg-slate-950 ;
+  }
+  .texture-generate {
+    @apply text-gray-200 cursor-pointer bg-blue-600 rounded-lg w-full md:w-[60%] text-center py-[5px] hover:bg-blue-800 transition-all duration-300
+  }
+  .texture-save {
+    @apply text-gray-200 cursor-pointer bg-green-600 rounded-lg w-full md:w-[80%] text-center py-[5px] hover:bg-green-900 transition-all duration-300
+  }
+  .footer-title {
+    @apply text-gray-100 font-semibold text-[18px] mb-[16px] capitalize
+  }
+  .footer-link {
+    @apply hover:text-white transition-all duration-300 text-base
+  }
+  .social-icon {
+    @apply text-[22px] hover:text-white transition-all duration-300 cursor-pointer
+  }
+  .content-group {
+    @apply flex items-center gap-[10px]
+  }
+  .input-group {
+    @apply flex flex-col gap-[5px]
+  }
+  .input-confirm {
+    @apply flex gap-[5px] my-[20px] 
+  }
+  .input-label {
+    @apply text-base font-medium capitalize text-slate-700
+  }
+  .input {
+    @apply border-[1px] w-full border-gray-300 pb-[5px] outline-none rounded focus:ring-1 focus:ring-teal-400  py-[10px] pl-[10px] font-normal text-slate-700 text-base focus:border-transparent transition-all duration-300
+  }
+  .input-sumbit {
+    @apply border-none outline-none bg-teal-600 text-snow w-full mx-auto py-[10px] font-medium text-[18px] rounded-[10px] hover:bg-teal-700 transition-all duration-300
+  }
+  .conditions {
+    @apply border-b-[1px] border-gray-500
+  }
+  .error-msg {
+    @apply w-[80%] md:w-[60%] lg:w-[30%] py-[10px] text-center top-[10px] absolute left-[50%] -translate-x-[50%] bg-red-500 text-rose-950 font-semibold text-[20px] rounded 
+  }
+  .login-title {
+    @apply mb-[2em] text-[#1a3b5d]
+  }
+  .login-title h2{
+    @apply text-[25px] xx:text-[28px] max-xs:font-bold xs:text-[2em] font-medium  mb-[10px]
+  }
+  .login-title p {
+    @apply text-[18px] text-[#2e5068] font-medium
+  }
+  .login-group {
+    @apply flex flex-col gap-[10px]
+  }
+  .login-group label {
+    @apply text-[16px] text-[#4a6b84]
+  }
+  .login-input-group input {
+    @apply w-full border-dark border-0 rounded-full py-[10px] px-[20px] shadow-3xl  outline-none focus:ring-[2px] focus:ring-[#1f7a8c] text-gray-800 text-base tracking-wide transition-all duration-300 
+  }
+  .login-icons {
+    @apply absolute right-[20px] top-[50%] -translate-y-[50%] text-[#1f7a8c] cursor-pointer
+  }
+  .login-btn {
+    @apply mt-[10%] w-[100%] bg-[#1f7a8c] rounded-full py-[14px] text-[20px] text-snow transition-all duration-300 hover:bg-[#155563] hover:-translate-y-1
+  }
+  .forgot-pass {
+    @apply w-full text-center mt-[20px] cursor-pointer
+  }
+  .confirm-tab {
+    @apply w-full h-full z-10  bg-gray-900 bg-opacity-[0.7] absolute top-0
+  }
+  .confirm-card {
+    @apply w-[95%] xs:w-[80%] lg:w-[60%] xl:w-[40%]  bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[15px] px-[5%] py-[20px]
+  }
+  .confirm-cancel {
+    @apply w-[20px] text-dark outline-none absolute top-[10px] right-[20px] cursor-pointer hover:bg-red-600 hover:text-white py-[6px] px-[10px] duration-300 transition-all
+  }
+  .confirm-group {
+    @apply flex flex-col w-full gap-[10px]
+  }
+  .confirm-btn {
+    @apply absolute right-[6px] top-1/2 -translate-y-1/2 rounded-full outline-none bg-blue-500 text-white w-[30%] py-[6px] duration-300 transition-all hover:bg-blue-600
+  }
+  .confirm-input {
+    @apply w-full border-[1px] border-gray-400 rounded-full px-[20px] py-[10px] outline-none 
+  }
+  .empty-confirm {
+    @apply w-full border-[1px] border-red-600 rounded-full px-[20px] py-[10px] outline-none placeholder:text-red-600 text-red-600 
+  }
+  .not-confirm-tab {
+    @apply w-full h-full z-10 bg-gray-900 bg-opacity-[0.7] absolute top-0;
+  }
+  .not-found-tab {
+    @apply w-[90%] lg:w-[40%] z-10 xs:h-[70%] bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded
+  }
+  .nf-head {
+    /* background-image: url('../src/images/user-not-found.jpg'); */
+    @apply  w-full xs:h-[70%] xs:bg-not-found xs:bg-cover xs:bg-center relative rounded-t
+  }
+  .nf-link {
+    @apply text-[#189af7] font-medium hover:underline
+  }
+  .nf-icon {
+    @apply absolute right-[20px] top-[10px] cursor-pointer
+  }
+  .save-head {
+    @apply w-full h-[20%] my-[2em] bg-save-dark text-text text-center overflow-auto
+  }
+  .save-head-title {
+    @apply max-md:w-[95%] mx-auto my-[20px] text-[34px] font-normal capitalize
+  }
+  .save-head-body {
+    @apply max-md:w-[95%] mx-auto text-[24px] mb-[20px] save-gradient
+  }
+  .saved-card {
+    @apply w-full
+  }
+  .saved-img {
+    @apply w-[100%] xs:h-[40vh]
+  }
+  .saved-title {
+    @apply text-[18px] text-dark font-normal my-[15px] text-justify max-xs:text-center
+  }
+  .saved-btns {
+    @apply w-full flex items-center justify-between xs:gap-[20%] px-[10px]
+  }
+  .saved-preview {
+    @apply  text-green-700 font-semibold border-b-[2px]  outline-none   duration-300 transition-all hover:border-dark
+  }
+  .saved-delete {
+    @apply text-lava border-b-[2px] font-semibold outline-none duration-300 transition-all hover:border-dark
+  }
+  .save-signup {
+    @apply w-full text-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[20px] font-medium
+  }
 }
