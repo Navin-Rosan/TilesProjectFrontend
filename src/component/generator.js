@@ -16,7 +16,9 @@ function Generator() {
     const [loader, setLoader] = useState(0);
 
     const navigate = useNavigate();
-    const key = "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";
+    const key = process.env.REACT_APP_HUGGING_FACE_API_KEY;
+    console.log(key);
+    
     const imgCount = 4;
     const retryCount = 8;
 
