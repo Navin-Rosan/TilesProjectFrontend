@@ -15,6 +15,7 @@ function Signin( {setUser} ) {
     const [errorMsg, setErrrorMsg] = useState(null);
     const [fetchError, setFetchError] = useState(null);
     const [mask, setMask] = useState(false);
+    const [loading, setLoading] = useState(false);
     
     function handleData(event) {
         const {name, value} = event.target;
@@ -66,16 +67,19 @@ function Signin( {setUser} ) {
     }
     async function handleSignup(event) {
         event.preventDefault();
+        setLoading(true);
 
         if(validInputs()) {
             try {
-                const response = await axios.post("http://localhost:8080/design/register", userData);
+                const response = await axios.post("https://tilesprojectbackend-production.up.railway.app/design/register", userData);
                 if(response.data.message === "user successfully registered"){
                     setUser(response.data.user);
                     navigate("/", { replace: true });
                 }
                 else
-                    setErrrorMsg(response.data.message)
+                    setErrrorMsg(response.data.message);
+
+                setLoading(false);
             }
             catch(error) {
                 setFetchError("Unable to connect server, check your connection or server is down!");
@@ -90,6 +94,11 @@ function Signin( {setUser} ) {
             {fetchError ? 
                 <div className="w-full">{fetchError}</div> :
                 <div className="w-full h-screen flex rlative">
+                    {loading && (
+                        <div className="absolute top-[0%] z-10 w-full h-screen bg-gray-900 bg-opacity-70  left-[50%] -translate-x-[50%] flex justify-center items-center ">
+                            <div className="w-[4em] h-[4em] border-[#AA60C8] border-t-[2px] rounded-full animate-spin"></div>
+                        </div>
+                    )}
                     <section className="w-[50%] h-full bg-gradient-to-t to-indigo-950 from-blue-950 text-snow max-md:hidden">
                         <div className="flex flex-col w-[90%] lg:w-[70%] mx-auto h-[80%] justify-center ">
                             <h1 className="font-medium text-[2.5em] mb-[1.5em]">The choice of new generation.</h1>

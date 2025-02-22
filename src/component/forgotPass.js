@@ -14,6 +14,7 @@ function ForgotPassword({ forgot, setForgot }) {
     const [msg, setMsg] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     function handleInput(event) {
@@ -42,17 +43,18 @@ function ForgotPassword({ forgot, setForgot }) {
 
     async function handleEmail(event) {
         event.preventDefault();
+        setLoading(true);
         if (validPassword()) {
             try {
                 const response = await axios.put(
-                    `http://localhost:8080/design/public/update-password`, input
+                    `https://tilesprojectbackend-production.up.railway.app/design/public/update-password`, input
                 );
                 if (response.data === "Password changed successfully") {
-                    setMsg("Password changed successfully");
                     window.location.reload();
                 } else {
                     setMsg(response.data);
                 }
+                setLoading(false)
             } catch (error) {
                 setMsg("Error updating password. Please try again.");
             }
@@ -62,6 +64,11 @@ function ForgotPassword({ forgot, setForgot }) {
     return (
         forgot && (
             <div className="w-full h-screen absolute bg-transparent flex items-center justify-center">
+                {loading && (
+                    <div className="absolute top-[0%] z-10 w-full h-screen bg-gray-900 bg-opacity-70  left-[50%] -translate-x-[50%] flex justify-center items-center ">
+                        <div className="w-[4em] h-[4em] border-[#AA60C8] border-t-[2px] rounded-full animate-spin"></div>
+                    </div>
+                )}
                 <section className="w-[90%] xs:w-[80%] md:w-[60%] lg:w-[40%] bg-white p-6 relative rounded-lg shadow-lg">
                     <FontAwesomeIcon icon={faX} onClick={() => setForgot(!forgot)} className="cursor-pointer absolute right-4 top-4" />
                     <h2 className="text-xl font-semibold text-center mb-4">Reset Password</h2>

@@ -11,7 +11,7 @@
     @apply flex lg:flex-row  flex-col lg:gap-[20px] gap-[10px] items-center text-[16px] text-gray-600 ;
   }
   .profile-container {
-    @apply w-[90%] xs:w-[60%] md:w-[50%] fixed lg:-right-[10%] max-lg:top-0 transition-all duration-700 ease-in-out max-lg:left-[20px] bg-gray-800 text-snow p-[20px] z-10 
+    @apply w-[90%] xs:w-[60%] md:w-[50%]   fixed lg:right-[0px] xl:-right-[10%] max-lg:top-0 transition-all duration-700 ease-in-out max-lg:left-[20px]  bg-gray-800 text-snow p-[20px] z-10 
   }
   .cancel-profile {
     @apply absolute right-[5px] top-[5px] bg-snow cursor-pointer
@@ -32,7 +32,7 @@
     @apply w-[100%] flex flex-col items-center lg:justify-center gap-y-[10px] mb-[20px]
   }
   .profile-img img {
-    @apply w-full md:w-[80%] lg:w-[20%] lg:rounded-full
+    @apply w-full md:w-[80%] lg:w-[30%] xl:w-[40%] lg:rounded-full
   }
   .edit label{
     @apply text-gray-200 cursor-pointer transition-all hover:text-teal-400 duration-300

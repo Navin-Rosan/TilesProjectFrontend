@@ -8,10 +8,11 @@ function Save({user}) {
     const [savedImg, setSavedImg] = useState([]);
     const [fetchError, setFetchError] = useState(null);
     const [loading, setLoading] = useState(true)
+    const [deleteLoading, setDL] = useState(false)
     async function fetchImg() {
         setLoading(true)
         try {
-            if(user){const response = await axios.get(`http://localhost:8080/design/public/get-save-img/${user.email}`)
+            if(user){const response = await axios.get(`https://tilesprojectbackend-production.up.railway.app/design/public/get-save-img/${user.email}`)
             setSavedImg(response.data)}
         }
         catch(error) {
@@ -37,15 +38,19 @@ function Save({user}) {
     }
 
     async function handleDelete(title) {
+        setDL(true);
         try {
-            await axios.delete(`http://localhost:8080/design/public/delete-save-img/${user.email}/${title}`);
+            await axios.delete(`https://tilesprojectbackend-production.up.railway.app/design/public/delete-save-img/${user.email}/${title}`);
             setSavedImg((prev) => prev.filter((img) => img.title !== title));
         }
         catch(error) {
             setFetchError("something went wrong, please try again later!");
         }
+        finally {
+            setDL(false)
+        }
     }
-
+    
     
     return(
         <>
@@ -54,6 +59,11 @@ function Save({user}) {
                 <div className="w-full h-screen">{fetchError}</div> :
                 <div className="w-full">
                     <div className="w-full min-h-screen  mb-[2em] relative">
+                            {deleteLoading && (
+                                <div className="absolute top-[0%] z-10 w-full h-full bg-gray-900 bg-opacity-70  left-[50%] -translate-x-[50%] flex justify-center items-center ">
+                                    <div className="w-[4em] h-[4em] border-[#AA60C8] border-t-[2px] rounded-full animate-spin"></div>
+                                </div>
+                            )}
                         <header className="save-head">
                             {(user ?
                                 <>
@@ -70,7 +80,10 @@ function Save({user}) {
                         {(user ?
                             loading ? 
                             <div className="w-full flex justify-center items-center py-10">Loading...</div> :
-                            <div className="w-full  grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[20px] xs:gap-[10px] px-[10px]">
+                            <div className={`w-full  ${savedImg.length > 0 && 'grid'} grid-cols-1 xs:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[20px] xs:gap-[10px] px-[10px] relative`}>
+                            {savedImg.length === 0 && (
+                                <div className="w-full flex items-center justify-center h-full font-semibold text-gray-700 text-[24px]">save section is Empty!</div>
+                            )}
                             {savedImg && (
                                 savedImg.map((value, index)=>{
                                     return(

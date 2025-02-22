@@ -24,6 +24,7 @@ const WallScene = ({user}) => {
 	const [fetchError, setFetchError] = useState(null);
 	const [fileError, setFileError] = useState(null)
 	const [inputColor, setInputColor] = useState('');
+    const [loading, setLoading] = useState(false);
 	const isValidHex = (color) => /^#([0-9A-Fa-f]{3}){1,2}$/.test(color);
 	const loader = textureUrl || customeUrl;
 	function TextureComponent({ url }) {
@@ -56,9 +57,10 @@ const WallScene = ({user}) => {
 		return true;
 	}
 	async function handlebackend() {
+        setLoading(true);
 		try {
 			if(validTitle()){
-				const response = await axios.post(`http://localhost:8080/design/public/save-img/${user.email}`, {
+				const response = await axios.post(`https://tilesprojectbackend-production.up.railway.app/design/public/save-img/${user.email}`, {
 					title: title,
 					url: textureUrl || customeUrl,
 					colorCode: color
@@ -77,7 +79,9 @@ const WallScene = ({user}) => {
 		catch(error) {
 			setFetchError("something went wrong, please try again later!");
 		}
-		
+		finally {
+        	setLoading(false);
+		}
 	}
 	function handleSize(size) {
 		const sizeMap = {
@@ -137,6 +141,11 @@ const WallScene = ({user}) => {
 		<title>Texture</title>
 		{fetchError ? <div className="w-full">{fetchError}</div> :
 			<div className="w-full min-h-screen relative bg-gray-900">
+				{loading && (
+                    <div className="absolute top-[0%] z-30 w-full h-screen bg-gray-900 bg-opacity-70  left-[50%] -translate-x-[50%] flex justify-center items-center ">
+                        <div className="w-[4em] h-[4em] border-[#AA60C8] border-t-[2px] rounded-full animate-spin"></div>
+                    </div>
+                )}
 			{fileError && (
 				<p className="w-[80%] lg:w-[30%] z-10 text-center bg-red-500 text-red-800 font-semibold transition-all duration-500 absolute top-[80%] max-lg:-translate-y-1/2 lg:top-[10%] left-1/2 -translate-x-1/2 rounded-[5px] py-[2em] lg:py-[20px]">{fileError}</p>
 			)}

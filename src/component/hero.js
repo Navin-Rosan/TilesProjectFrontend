@@ -14,7 +14,10 @@ function Hero() {
             const timer = setTimeout(()=>{
                 setMsg(null);
             }, 3000);
-            return () => clearTimeout(timer);
+            return () =>{ 
+                clearTimeout(timer)
+                setMsg(null)
+            };
         }
     },[responseMessage])
     

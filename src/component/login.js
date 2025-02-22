@@ -15,6 +15,7 @@ function Login({setUser}) {
     const [mask, setMask] = useState(false);
     const [fetchError, setFetchError] = useState(null);
     const [forgot, setForgot] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     function handleInput(event) {
         const {name, value} = event.target;
@@ -44,15 +45,17 @@ function Login({setUser}) {
 
     async function handleLogin(event) {
         event.preventDefault();
+        setLoading(true);
         try {
             if(validValues()) {
-                const response = await axios.post("http://localhost:8080/design/login", input);
+                const response = await axios.post("https://tilesprojectbackend-production.up.railway.app/design/login", input);
                 if(response.data.message === "user login successfully"){
                     setUser(response.data.user)
                     navigate('/', {replace: true, state: {responseMessage: response.data.message}});
                 }
                 else
                     setErrrorMsg(response.data.message);
+                setLoading(false)
             }
         }
         catch(error) {
@@ -61,14 +64,19 @@ function Login({setUser}) {
     }
 
     function togglerMask() {setMask(!mask)}
-
+    
     return(
         <>
         <title>Login</title>
         {fetchError ? 
             <div className="w-full">{fetchError}</div> :
             <div className="flex w-full h-screen font-roboto relative">
-                {errorMsg && (<p className="max-md:w-[80%] max-lg:w-[60%] max-lg:text-center absolute top-[20px] left-[50%] -translate-x-1/2 bg-[#f8d7da] text-[#721c24] max-lg:py-[10px] lg:p-[10px] border-[1px] border-[#f5c6cb] rounded-[4px]">{JSON.stringify(errorMsg)}</p>)}
+                {loading && (
+                    <div className="absolute top-[0%] z-10 w-full h-screen bg-gray-900 bg-opacity-70  left-[50%] -translate-x-[50%] flex justify-center items-center ">
+                        <div className="w-[4em] h-[4em] border-[#AA60C8] border-t-[2px] rounded-full animate-spin"></div>
+                    </div>
+                )}
+                {errorMsg && (<p className="max-md:w-[80%] max-lg:w-[60%] max-lg:text-center absolute top-[20px] left-[50%] -translate-x-1/2 bg-[#f8d7da] text-[#721c24] max-lg:py-[10px] lg:p-[2px] border-[1px] border-[#f5c6cb] rounded-[4px]">{JSON.stringify(errorMsg)}</p>)}
                 <section className="w-full md:w-[50%] h-full bg-[#bfdbf7]">
                     <div className="h-full w-[90%] xs:w-[70%] md:w-[90%] lg:w-[70%] xl:w-[65%] mx-auto flex flex-col justify-center">
                         <form onSubmit={handleLogin} className="">  

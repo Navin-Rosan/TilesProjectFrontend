@@ -10,6 +10,7 @@ function Nav( {user, setUser} ) {
     const navigate = useNavigate();
     const [isAuthenticated, setIsAuthenticated] = useState(!!user);
     const [visitProfile, setVisitProfile] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [nav, setNav] = useState(false)
     const [userImg, setUserImg] = useState(()=>{
         if (user) {
@@ -42,15 +43,22 @@ function Nav( {user, setUser} ) {
 		}
     }
     async function save() {
-        await axios.put(`http://localhost:8080/design/public/img/${user.email}`,{img: userImg});
-        localStorage.setItem('img', JSON.stringify(userImg));
+        setLoading(true)
+        try {
+            await axios.put(`https://tilesprojectbackend-production.up.railway.app/design/public/img/${user.email}`,{img: userImg});
+            localStorage.setItem('img', JSON.stringify(userImg));
+            window.location.reload();
+        }
+        finally {
+            setLoading(false)
+        }
     }
     
     function toggleNav() {
         setNav(!nav);
         setVisitProfile(false)
     }
-
+    
     return(
         <div className=" w-full h-[10%] bg-nav flex justify-center flex-col">
             <nav className={`flex justify-between w-[80%] mx-auto lg:mx-0 lg:justify-around lg:w-full items-center`}>
@@ -115,11 +123,16 @@ function Nav( {user, setUser} ) {
                             </div>
                             </>
                      )} 
+                     {loading && (
+                    <div className="absolute top-[0%] z-10 w-full h-full bg-gray-900 bg-opacity-70  left-[50%] -translate-x-[50%] flex justify-center items-center ">
+                        <div className="w-[4em] h-[4em] border-[#AA60C8] border-t-[2px] rounded-full animate-spin"></div>
+                    </div>
+                )}
                         </section>
                     {isAuthenticated ?
                     (
                         <div className="nav-profile" onClick={condition}>
-                            <div className=""><img src={userImg || userLogo} className="w-[2em] rounded-full" alt="" /></div>
+                            <div className=""><img src={ userImg || userLogo } className="w-[2em] rounded-full" alt="" /></div>
                             <div className="text-gray-600" >Profile</div>
                         </div>
                     ) :
