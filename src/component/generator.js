@@ -17,7 +17,7 @@ function Generator() {
 
     const navigate = useNavigate();
     
-    const key = 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;
+    const key = "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";
     
     const imgCount = 4;
     const retryCount = 8;
