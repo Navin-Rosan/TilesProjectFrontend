@@ -17,7 +17,7 @@ function Generator() {
 
     const navigate = useNavigate();
     
-    const key = process.env.REACT_APP_HUGGING_FACE_API_KEY;
+    const key = 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;
     
     const imgCount = 4;
     const retryCount = 8;
