@@ -47,7 +47,7 @@ function ForgotPassword({ forgot, setForgot }) {
         if (validPassword()) {
             try {
                 const response = await axios.put(
-                    `https://tilesprojectbackend-production.up.railway.app/design/public/update-password`, input
+                    `https://merry-youth-production.up.railway.app/design/public/update-password`, input
                 );
                 if (response.data === "Password changed successfully") {
                     window.location.reload();
