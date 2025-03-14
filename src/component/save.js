@@ -12,7 +12,7 @@ function Save({user}) {
     async function fetchImg() {
         setLoading(true)
         try {
-            if(user){const response = await axios.get(`https://tilesprojectbackend-production.up.railway.app/design/public/get-save-img/${user.email}`)
+            if(user){const response = await axios.get(`https://merry-youth-production.up.railway.app/design/public/get-save-img/${user.email}`)
             setSavedImg(response.data)}
         }
         catch(error) {
@@ -40,7 +40,7 @@ function Save({user}) {
     async function handleDelete(title) {
         setDL(true);
         try {
-            await axios.delete(`https://tilesprojectbackend-production.up.railway.app/design/public/delete-save-img/${user.email}/${title}`);
+            await axios.delete(`https://merry-youth-production.up.railway.app/design/public/delete-save-img/${user.email}/${title}`);
             setSavedImg((prev) => prev.filter((img) => img.title !== title));
         }
         catch(error) {
