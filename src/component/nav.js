@@ -45,7 +45,7 @@ function Nav( {user, setUser} ) {
     async function save() {
         setLoading(true)
         try {
-            await axios.put(`https://tilesprojectbackend-production.up.railway.app/design/public/img/${user.email}`,{img: userImg});
+            await axios.put(`https://merry-youth-production.up.railway.app/design/public/img/${user.email}`,{img: userImg});
             localStorage.setItem('img', JSON.stringify(userImg));
             window.location.reload();
         }
