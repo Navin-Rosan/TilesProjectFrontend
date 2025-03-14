@@ -60,7 +60,7 @@ const WallScene = ({user}) => {
         setLoading(true);
 		try {
 			if(validTitle()){
-				const response = await axios.post(`https://tilesprojectbackend-production.up.railway.app/design/public/save-img/${user.email}`, {
+				const response = await axios.post(`https://merry-youth-production.up.railway.app/design/public/save-img/${user.email}`, {
 					title: title,
 					url: textureUrl || customeUrl,
 					colorCode: color
