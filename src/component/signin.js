@@ -71,7 +71,7 @@ function Signin( {setUser} ) {
 
         if(validInputs()) {
             try {
-                const response = await axios.post("https://tilesprojectbackend-production.up.railway.app/design/register", userData);
+                const response = await axios.post("https://merry-youth-production.up.railway.app/design/register", userData);
                 if(response.data.message === "user successfully registered"){
                     setUser(response.data.user);
                     navigate("/", { replace: true });
